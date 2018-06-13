@@ -57,6 +57,3 @@ sudo java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8080 -auth a
 
 # RESTART JENKINS TO ACTIVATE PLUGINS
 sudo java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8080 -auth admin:$PASS restart
-
-# INSTALL SERVERLESS FRAMEWORK (REQUIRES NODE.JS PLUGIN)
-sudo npm install -g serverless
