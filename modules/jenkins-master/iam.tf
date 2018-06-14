@@ -69,3 +69,30 @@ resource "aws_iam_policy_attachment" "jenkins_server_cloudwatch" {
   roles      = ["${aws_iam_role.jenkins_server.name}"]
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
 }
+
+resource "aws_iam_policy_attachment" "jenkins_server_cloudformation" {
+  name       = "CloudFormationFullAccess"
+  roles      = ["${aws_iam_role.jenkins_server.name}"]
+  policy_arn = "${aws_iam_policy.server_cloudformation_policy.arn}"
+}
+
+resource "aws_iam_policy" "server_cloudformation_policy" {
+  name        = "Jenkins-server-cloudformation-policy"
+  path        = "/"
+  description = "Allows Jenkins to create CloudFormation templates"
+
+  policy = <<EOF
+{
+   "Version": "2012-10-17",
+   "Statement":[
+     {
+      "Effect": "Allow",
+      "Action": [
+          "cloudformation:*"
+          ],
+      "Resource": "*"
+     }
+   ]
+}
+EOF
+}
