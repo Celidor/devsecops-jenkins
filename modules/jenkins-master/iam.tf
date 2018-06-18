@@ -76,8 +76,14 @@ resource "aws_iam_policy_attachment" "jenkins_server_cloudformation" {
   policy_arn = "${aws_iam_policy.server_cloudformation_policy.arn}"
 }
 
+resource "aws_iam_policy_attachment" "jenkins_server_iam" {
+  name       = "IamCreateRole"
+  roles      = ["${aws_iam_role.jenkins_server.name}"]
+  policy_arn = "${aws_iam_policy.server_iam_policy.arn}"
+}
+
 resource "aws_iam_policy" "server_cloudformation_policy" {
-  name        = "Jenkins-server-cloudformation-policy"
+  name        = "jenkins-server-cloudformation-policy"
   path        = "/"
   description = "Allows Jenkins to create CloudFormation templates"
 
@@ -90,6 +96,28 @@ resource "aws_iam_policy" "server_cloudformation_policy" {
       "Action": [
           "cloudformation:*"
           ],
+      "Resource": "*"
+     }
+   ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "server_iam_policy" {
+  name        = "jenkins-server-iam-policy"
+  path        = "/"
+  description = "Allows Jenkins to create IAM roles"
+
+  policy = <<EOF
+{
+   "Version": "2012-10-17",
+   "Statement":[
+     {
+      "Effect": "Allow",
+      "Action": [
+          "iam:CreateRole",
+          "iam:PutRolePolicy"
+      ],
       "Resource": "*"
      }
    ]

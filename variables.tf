@@ -99,7 +99,7 @@ variable "ssh_key_path" {
 variable "plugins" {
   type        = "list"
   description = "A list of Jenkins plugins to install, use short names."
-  default     = ["git", "xunit", "aws-java-sdk", "aws-credentials", "blueocean", "nodejs", "dependency-check-jenkins-plugin"]
+  default     = ["git", "xunit", "aws-java-sdk", "blueocean", "nodejs", "zap", "dependency-check-jenkins-plugin"]
 }
 
 variable "tags" {
