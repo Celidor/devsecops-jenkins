@@ -76,6 +76,7 @@ module "security_group_rules" {
   name                        = "${var.name}"
   allowed_inbound_cidr_blocks = ["${var.allowed_inbound_cidr_blocks}"]
   allowed_ssh_cidr_blocks     = ["${var.allowed_ssh_cidr_blocks}"]
+  alb_security_group_id       = "${module.jenkins-alb.alb_security_group_id}"
 
   http_port  = "${var.http_port}"
   https_port = "${var.https_port}"

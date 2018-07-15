@@ -1,6 +1,6 @@
 variable "vpc_id" {
   description = "The ID of the VPC"
-  default = ""
+  default     = ""
 }
 
 variable "name" {
@@ -15,6 +15,10 @@ variable "allowed_inbound_cidr_blocks" {
 variable "allowed_ssh_cidr_blocks" {
   description = "A list of CIDR-formatted IP address ranges from which the EC2 Instances will allow connections on SSH"
   type        = "list"
+}
+
+variable "alb_security_group_id" {
+  description = "ID of the ALB security group"
 }
 
 variable "ssh_port" {
