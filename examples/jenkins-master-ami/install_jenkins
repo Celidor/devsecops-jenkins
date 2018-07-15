@@ -34,5 +34,9 @@ sudo yum install gcc-c++ make
 sudo npm install -g serverless
 sudo npm install serverless-domain-manager
 
+# install chefdk
+sudo wget https://packages.chef.io/files/stable/chefdk/3.1.0/el/7/chefdk-3.1.0-1.el7.x86_64.rpm
+sudo rpm -Uvh chefdk-3.1.0-1.el7.x86_64.rpm
+
 # todo: parameterize version
 sudo yum install -y jenkins
