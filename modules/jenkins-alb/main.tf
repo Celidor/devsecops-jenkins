@@ -4,10 +4,6 @@ data "aws_instance" "jenkins" {
   instance_id = "${var.jenkins_instance_id}"
 }
 
-#data "aws_subnet_ids" "default" {
-#  vpc_id = "${var.vpc_id}"
-#}
-
 # Create the security group to control access to the load balancer
 module "lb-security-group" {
   source                      = "../jenkins-alb-security-group"
@@ -22,6 +18,11 @@ resource "aws_lb" "alb" {
   name            = "${var.name_prefix}-alb"
   security_groups = ["${module.lb-security-group.lb_security_group_id}"]
   subnets         = ["${var.subnet_ids}"]
+
+  tags {
+    Name        = "jenkins-${terraform.workspace}"
+    Environment = "${terraform.workspace}"
+  }
 }
 
 # Create a target group to send traffic to for JIRA

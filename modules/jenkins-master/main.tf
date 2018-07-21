@@ -46,7 +46,11 @@ resource "aws_instance" "ec2_jenkins_master" {
   subnet_id              = "${var.subnet_id}"
   monitoring             = true
   vpc_security_group_ids = ["${module.security_group_rules.jenkins_security_group_id}"]
-  tags                   = "${merge(map("Name", format("%s-%d", var.name, count.index+1)), map("Terraform", "true"), map("Environment", var.environment), var.tags)}"
+
+  tags {
+    Name        = "jenkins-${terraform.workspace}"
+    Environment = "${terraform.workspace}"
+  }
 
   provisioner "file" {
     connection = {
@@ -74,7 +78,7 @@ resource "aws_instance" "ec2_jenkins_master" {
 module "security_group_rules" {
   source = "../jenkins-security-group-rules"
 
-  name                        = "${var.name}"
+  name                        = "jenkins-${terraform.workspace}"
   allowed_inbound_cidr_blocks = ["${var.allowed_inbound_cidr_blocks}"]
   allowed_ssh_cidr_blocks     = ["${var.allowed_ssh_cidr_blocks}"]
   alb_security_group_id       = "${module.jenkins-alb.alb_security_group_id}"

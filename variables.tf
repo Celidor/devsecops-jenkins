@@ -7,9 +7,6 @@
 # AWS_SECRET_ACCESS_KEY
 
 # ---------------------------------------------------------------------------------------------------------------------
-# APPLICATION LOAD BALANCER CONFIGURATION
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
 variable "aws_account" {
   description = "AWS Account ID which authored the Jenkins AMIs"
 }
@@ -22,14 +19,9 @@ variable "dns_zone" {
   description = "DNS zone in AWS Route53 to use with the ALB"
 }
 
-variable "app_dns_name" {
-  description = "DNS name within the zone to dynamically point to the ALB"
-}
-
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
+#variable "app_dns_name" {
+#  description = "DNS name within the zone to dynamically point to the ALB"
+#}
 
 variable "name" {
   description = "Name to be used on all instances as prefix"

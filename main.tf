@@ -10,8 +10,8 @@ module "jenkins-master" {
   subnet_id  = "${module.jenkins-vpc.jenkins_subnet_az1_id}"
   subnet_ids = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]
 
-  name          = "${var.name == "" ? "jenkins-master" : join("-", list(var.name, "jenkins-master"))}"
-  alb_prefix    = "${var.name == "" ? "jenkins" : join("-", list(var.name, "jenkins"))}"
+  name          = "jenkins-${terraform.workspace}"
+  alb_prefix    = "jenkins-${terraform.workspace}"
   instance_type = "${var.instance_type_master}"
 
   ami_id     = "${var.master_ami_id == "" ? data.aws_ami.jenkins.image_id : var.master_ami_id}"
@@ -28,7 +28,7 @@ module "jenkins-master" {
   subnet_ids              = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]
   aws_ssl_certificate_arn = "${var.aws_ssl_certificate_arn}"
   dns_zone                = "${var.dns_zone}"
-  app_dns_name            = "${var.app_dns_name}"
+  app_dns_name            = "jenkins-${terraform.workspace}.${var.dns_zone}"
 }
 
 data "template_file" "setup_data_master" {
@@ -41,6 +41,7 @@ data "template_file" "setup_data_master" {
 }
 
 # Jenkins Linux Slave Instance(s)
+/*
 module "jenkins-linux-slave" {
   source = "./modules/jenkins-slave"
 
@@ -58,7 +59,7 @@ module "jenkins-linux-slave" {
   ssh_key_name = "${var.ssh_key_name}"
   ssh_key_path = "${var.ssh_key_path}"
 }
-
+*/
 #data "aws_vpc" "default" {
 #  default = true
 #}
