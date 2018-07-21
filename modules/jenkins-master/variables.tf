@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "environment" {
-  description = "The environement tag to add to Jenkins master instance",
+  description = "The environement tag to add to Jenkins master instance"
   default     = ""
 }
 
@@ -17,12 +17,16 @@ variable "instance_type" {
 
 variable "vpc_id" {
   description = "The ID of the VPC"
-  default = ""
+  default     = ""
+}
+
+variable "subnet_id" {
+  description = "Subnet to launch Jenkins in"
 }
 
 variable "subnet_ids" {
   description = "Subnets for the load balancer listener to use"
-  type = "list"
+  type        = "list"
 }
 
 variable "aws_ssl_certificate_arn" {
@@ -90,8 +94,7 @@ variable "jnlp_port" {
 }
 
 variable "tags" {
-  type = "map"
+  type        = "map"
   description = "Supply tags you want added to all resources"
-  default = {
-  }
+  default     = {}
 }

@@ -6,7 +6,9 @@ provider "aws" {
 module "jenkins-master" {
   source = "./modules/jenkins-master"
 
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id     = "${module.jenkins-vpc.jenkins_vpc_id}"
+  subnet_id  = "${module.jenkins-vpc.jenkins_subnet_az1_id}"
+  subnet_ids = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]
 
   name          = "${var.name == "" ? "jenkins-master" : join("-", list(var.name, "jenkins-master"))}"
   alb_prefix    = "${var.name == "" ? "jenkins" : join("-", list(var.name, "jenkins"))}"
@@ -17,13 +19,13 @@ module "jenkins-master" {
   setup_data = "${data.template_file.setup_data_master.rendered}"
 
   http_port                   = "${var.http_port}"
-  allowed_ssh_cidr_blocks     = ["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
-  allowed_inbound_cidr_blocks = ["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
+  allowed_ssh_cidr_blocks     = ["${chomp(data.http.ip.body)}/32"]   #["0.0.0.0/0"]
+  allowed_inbound_cidr_blocks = "${var.allowed_inbound_cidr_blocks}" #["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
   ssh_key_name                = "${var.ssh_key_name}"
   ssh_key_path                = "${var.ssh_key_path}"
 
   # Config used by the Application Load Balancer
-  subnet_ids              = "${data.aws_subnet_ids.default.ids}"
+  subnet_ids              = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]
   aws_ssl_certificate_arn = "${var.aws_ssl_certificate_arn}"
   dns_zone                = "${var.dns_zone}"
   app_dns_name            = "${var.app_dns_name}"
@@ -57,10 +59,16 @@ module "jenkins-linux-slave" {
   ssh_key_path = "${var.ssh_key_path}"
 }
 
-data "aws_vpc" "default" {
-  default = true
-}
+#data "aws_vpc" "default" {
+#  default = true
+#}
 
-data "aws_subnet_ids" "default" {
-  vpc_id = "${data.aws_vpc.default.id}"
+#data "aws_subnet_ids" "default" {
+#  vpc_id = "${data.aws_vpc.default.id}"
+#}
+
+module "jenkins-vpc" {
+  source = "./modules/jenkins-vpc"
+
+  aws_region = "${var.aws_region}"
 }

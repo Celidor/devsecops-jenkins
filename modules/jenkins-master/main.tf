@@ -43,6 +43,7 @@ resource "aws_instance" "ec2_jenkins_master" {
   user_data              = "${var.user_data}"
   key_name               = "${var.ssh_key_name}"
   iam_instance_profile   = "${aws_iam_instance_profile.jenkins_server.name}"
+  subnet_id              = "${var.subnet_id}"
   monitoring             = true
   vpc_security_group_ids = ["${module.security_group_rules.jenkins_security_group_id}"]
   tags                   = "${merge(map("Name", format("%s-%d", var.name, count.index+1)), map("Terraform", "true"), map("Environment", var.environment), var.tags)}"
@@ -77,6 +78,7 @@ module "security_group_rules" {
   allowed_inbound_cidr_blocks = ["${var.allowed_inbound_cidr_blocks}"]
   allowed_ssh_cidr_blocks     = ["${var.allowed_ssh_cidr_blocks}"]
   alb_security_group_id       = "${module.jenkins-alb.alb_security_group_id}"
+  vpc_id                      = "${var.vpc_id}"
 
   http_port  = "${var.http_port}"
   https_port = "${var.https_port}"

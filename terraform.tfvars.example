@@ -9,3 +9,7 @@ ssh_key_name = "jenkins-training"
 ssh_key_path = "~/.ssh/jenkins-training.pem"
 
 aws_account = "ACCOUNT_ID" #the AWS Account ID which authored the AMIs
+
+allowed_ssh_cidr_blocks = ["1.1.1.1/32"]
+
+allowed_inbound_cidr_blocks = ["1.1.1.1/32"]

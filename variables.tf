@@ -71,6 +71,16 @@ variable "instance_type_master" {
   default     = "t2.micro"
 }
 
+variable "allowed_ssh_cidr_blocks" {
+  description = "A list of CIDR-formatted IP address ranges from which the EC2 Instances will allow connections on SSH"
+  type        = "list"
+}
+
+variable "allowed_inbound_cidr_blocks" {
+  description = "A list of CIDR-formatted IP address ranges from which the EC2 Instances will allow connections to Jenkins"
+  type        = "list"
+}
+
 variable "http_port" {
   description = "The port to use for HTTP traffic to Jenkins"
   default     = 8080
@@ -79,6 +89,16 @@ variable "http_port" {
 variable "jnlp_port" {
   description = "The Port to use for Jenkins master to slave communication bewtween instances"
   default     = 49187
+}
+
+variable "ssh_port" {
+  description = "The port used for SSH connections"
+  default     = 22
+}
+
+variable "https_port" {
+  description = "The port to use for HTTPS traffic to Jenkins"
+  default     = 443
 }
 
 variable "instance_type_slave" {

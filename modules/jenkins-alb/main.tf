@@ -4,9 +4,9 @@ data "aws_instance" "jenkins" {
   instance_id = "${var.jenkins_instance_id}"
 }
 
-data "aws_subnet_ids" "default" {
-  vpc_id = "${var.vpc_id}"
-}
+#data "aws_subnet_ids" "default" {
+#  vpc_id = "${var.vpc_id}"
+#}
 
 # Create the security group to control access to the load balancer
 module "lb-security-group" {
@@ -26,17 +26,17 @@ resource "aws_lb" "alb" {
 
 # Create a target group to send traffic to for JIRA
 resource "aws_lb_target_group" "alb_tg" {
-  name      = "${var.name_prefix}-alb-tg"
-  port      = "${var.http_port}"
-  protocol  = "HTTP"
-  vpc_id    = "${var.vpc_id}"
+  name     = "${var.name_prefix}-alb-tg"
+  port     = "${var.http_port}"
+  protocol = "HTTP"
+  vpc_id   = "${var.vpc_id}"
 }
 
 # Attach the JIRA EC2 instance to the target group
 resource "aws_lb_target_group_attachment" "tg_attach" {
-  target_group_arn  = "${aws_lb_target_group.alb_tg.arn}"
-  target_id         = "${var.jenkins_instance_id}"
-  port              = "${var.http_port}"
+  target_group_arn = "${aws_lb_target_group.alb_tg.arn}"
+  target_id        = "${var.jenkins_instance_id}"
+  port             = "${var.http_port}"
 }
 
 # Associate the listener resource to the load balancer, and configure SSL
@@ -48,14 +48,14 @@ resource "aws_lb_listener" "lb-listener" {
   certificate_arn   = "${var.aws_ssl_certificate_arn}"
 
   "default_action" {
-    target_group_arn  = "${aws_lb_target_group.alb_tg.arn}"
-    type              = "forward"
+    target_group_arn = "${aws_lb_target_group.alb_tg.arn}"
+    type             = "forward"
   }
 }
 
 # Update the DNS zone in AWS Route53 to point our domain name to this ALB
 data "aws_route53_zone" "app_dns_zone" {
-  name = "${var.dns_zone}"
+  name         = "${var.dns_zone}"
   private_zone = false
 }
 
