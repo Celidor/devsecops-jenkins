@@ -1,17 +1,26 @@
 # DevSecOps-Jenkins
 
-Build a Jenkins server in AWS
-
-First create the Jenkins AMI:
+## Build Jenkins Amazon Machine Image (AMI)
 
 * Use Packer script in the jenkins-master-ami directory
 
-Then build the Jenkins server using the ami
+## Build a Jenkins server in AWS
+
+* clone the repository
+
+```
+git clone https://github.com/celidor/devsecops-jenkins
+cd devsecops-jenkins
+```
 
 * Duplicate terraform.tfvars.example and rename to terraform.tfvars
 * Enter details and save
 
 The example below is for an environment name "csa1" and a domain "example.com"
+
+* Log in to the AWS console, select EC2, Key Pairs
+* Create a new key pair named jenkins-csa1
+* Copy the downloaded jenkins-csa.pem to the root of devsecops-jenkins directory
 
 ```
 terraform workspace new csa1
@@ -28,4 +37,4 @@ To destroy:
 terraform destroy
 ```
 
-Derived from: https://github.com/ignw/terraform-aws-jenkins
+This code has been derived from: https://github.com/ignw/terraform-aws-jenkins

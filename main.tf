@@ -21,8 +21,8 @@ module "jenkins-master" {
   http_port                   = "${var.http_port}"
   allowed_ssh_cidr_blocks     = "${var.allowed_ssh_cidr_blocks}"     #["${chomp(data.http.ip.body)}/32"]   #["0.0.0.0/0"]
   allowed_inbound_cidr_blocks = "${var.allowed_inbound_cidr_blocks}" #["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
-  ssh_key_name                = "${var.ssh_key_name}"
-  ssh_key_path                = "${var.ssh_key_path}"
+  ssh_key_name                = "jenkins-${terraform.workspace}"
+  ssh_key_path                = ""
 
   # Config used by the Application Load Balancer
   subnet_ids              = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]

@@ -8,3 +8,6 @@
 # .tfvars files
 *.tfvars
 *.out
+
+#  Jenkins ssh keys
+jenkins-*.pem
