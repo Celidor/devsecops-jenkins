@@ -1,6 +1,6 @@
 # create security group to allow ssh
 resource "aws_security_group" "jenkins_security_group" {
-  name_prefix = "${var.name}"
+  name_prefix = "jenkins-${terraform.workspace}"
   description = "Security group for the ${var.name}"
   vpc_id      = "${var.vpc_id}"
 }

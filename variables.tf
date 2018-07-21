@@ -19,23 +19,9 @@ variable "dns_zone" {
   description = "DNS zone in AWS Route53 to use with the ALB"
 }
 
-#variable "app_dns_name" {
-#  description = "DNS name within the zone to dynamically point to the ALB"
-#}
-
 variable "name" {
   description = "Name to be used on all instances as prefix"
   default     = ""
-}
-
-variable "win_slave_count" {
-  description = "Number of windows slave instances to launch"
-  default     = 0
-}
-
-variable "linux_slave_count" {
-  description = "Number of linux slave instances to launch"
-  default     = 0
 }
 
 variable "aws_region" {
@@ -45,11 +31,6 @@ variable "aws_region" {
 
 variable "master_ami_id" {
   description = "ID of AMI to use for master instance(s)"
-  default     = ""
-}
-
-variable "linux_slave_ami_id" {
-  description = "ID of AMI to use for linux slave instance(s)"
   default     = ""
 }
 
@@ -93,11 +74,6 @@ variable "https_port" {
   default     = 443
 }
 
-variable "instance_type_slave" {
-  description = "Instance Type to use for slave instance(s)"
-  default     = "t2.micro"
-}
-
 variable "ssh_key_name" {
   description = "The name of an EC2 Key Pair that can be used to SSH to the EC2 Instances in this cluster. Set to an empty string to not associate a Key Pair."
   default     = ""
@@ -114,8 +90,11 @@ variable "plugins" {
   default     = ["git", "xunit", "aws-java-sdk", "blueocean", "nodejs", "zap", "dependency-check-jenkins-plugin"]
 }
 
+/*
 variable "tags" {
   type        = "map"
   description = "Supply tags you want added to all resources"
   default     = {}
 }
+*/
+
