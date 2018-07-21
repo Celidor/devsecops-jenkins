@@ -1,5 +1,5 @@
 resource "aws_iam_instance_profile" "jenkins_server" {
-  name = "jenkins-server-profile"
+  name = "jenkins-${terraform.workspace}-server-profile"
   role = "${aws_iam_role.jenkins_server.name}"
 
   provisioner "local-exec" {
@@ -8,7 +8,7 @@ resource "aws_iam_instance_profile" "jenkins_server" {
 }
 
 resource "aws_iam_role" "jenkins_server" {
-  name = "jenkins-server-role"
+  name = "jenkins-server-${terraform.workspace}-role"
   path = "/"
 
   assume_role_policy = <<EOF
@@ -83,7 +83,7 @@ resource "aws_iam_policy_attachment" "jenkins_server_iam" {
 }
 
 resource "aws_iam_policy" "server_cloudformation_policy" {
-  name        = "jenkins-server-cloudformation-policy"
+  name        = "jenkins-${terraform.workspace}-cloudformation-policy"
   path        = "/"
   description = "Allows Jenkins to create CloudFormation templates"
 
@@ -104,7 +104,7 @@ EOF
 }
 
 resource "aws_iam_policy" "server_iam_policy" {
-  name        = "jenkins-server-iam-policy"
+  name        = "jenkins-${terraform.workspace}-iam-policy"
   path        = "/"
   description = "Allows Jenkins to create IAM roles"
 

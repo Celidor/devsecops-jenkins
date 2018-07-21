@@ -1,3 +1,3 @@
-output "setup_data_master" {
-  value = "${data.template_file.setup_data_master.rendered}"
+output "jenkins_url" {
+  value = "https://jenkins-${terraform.workspace}.${var.dns_zone}"
 }

@@ -19,7 +19,7 @@ module "jenkins-master" {
   setup_data = "${data.template_file.setup_data_master.rendered}"
 
   http_port                   = "${var.http_port}"
-  allowed_ssh_cidr_blocks     = ["${chomp(data.http.ip.body)}/32"]   #["0.0.0.0/0"]
+  allowed_ssh_cidr_blocks     = "${var.allowed_ssh_cidr_blocks}"     #["${chomp(data.http.ip.body)}/32"]   #["0.0.0.0/0"]
   allowed_inbound_cidr_blocks = "${var.allowed_inbound_cidr_blocks}" #["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
   ssh_key_name                = "${var.ssh_key_name}"
   ssh_key_path                = "${var.ssh_key_path}"

@@ -3,6 +3,10 @@ resource "aws_security_group" "jenkins_security_group" {
   name_prefix = "jenkins-${terraform.workspace}"
   description = "Security group for the ${var.name}"
   vpc_id      = "${var.vpc_id}"
+
+  tags {
+    Name = "jenkins-${terraform.workspace}"
+  }
 }
 
 resource "aws_security_group_rule" "allow_ssh_inbound" {

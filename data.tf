@@ -1,6 +1,6 @@
-data "http" "ip" {
-  url = "http://ipv4.icanhazip.com"
-}
+#data "http" "ip" {
+#  url = "http://ipv4.icanhazip.com"
+#}
 
 data "aws_ami" "jenkins" {
   most_recent = true
