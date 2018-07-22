@@ -2,10 +2,6 @@ aws_ssl_certificate_arn = "arn:aws:acm:eu-west-1:{ACCOUNT_ID}:certificate/{ID}"
 
 dns_zone = "domain zone in route53, e.g. company.com"
 
-ssh_key_name = "jenkins-training"
-
-ssh_key_path = "~/.ssh/jenkins-training.pem"
-
 aws_account = "ACCOUNT_ID" #the AWS Account ID which authored the AMIs
 
 allowed_ssh_cidr_blocks = ["1.1.1.1/32"] #replace with your public IP address

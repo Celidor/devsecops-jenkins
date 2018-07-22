@@ -4,7 +4,7 @@ provider "aws" {
 
 # Jenkins Master Instance
 module "jenkins-master" {
-  source = "./modules/jenkins-master"
+  source = "modules/jenkins-master"
 
   vpc_id     = "${module.jenkins-vpc.jenkins_vpc_id}"
   subnet_id  = "${module.jenkins-vpc.jenkins_subnet_az1_id}"
@@ -22,7 +22,7 @@ module "jenkins-master" {
   allowed_ssh_cidr_blocks     = "${var.allowed_ssh_cidr_blocks}"     #["${chomp(data.http.ip.body)}/32"]   #["0.0.0.0/0"]
   allowed_inbound_cidr_blocks = "${var.allowed_inbound_cidr_blocks}" #["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
   ssh_key_name                = "jenkins-${terraform.workspace}"
-  ssh_key_path                = ""
+  ssh_key_path                = "jenkins-${terraform.workspace}.pem"
 
   # Config used by the Application Load Balancer
   subnet_ids              = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]
@@ -69,7 +69,7 @@ module "jenkins-linux-slave" {
 #}
 
 module "jenkins-vpc" {
-  source = "./modules/jenkins-vpc"
+  source = "modules/jenkins-vpc"
 
   aws_region = "${var.aws_region}"
 }

@@ -117,6 +117,7 @@ resource "aws_iam_policy" "server_iam_policy" {
       "Action": [
           "iam:CreateRole",
           "iam:CreateServiceLinkedRole",
+          "iam:DeleteRolePolicy",
           "iam:PutRolePolicy",
           "iam:PutRolePolicy"
       ],
