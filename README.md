@@ -4,6 +4,11 @@
 
 * Use Packer script in the jenkins-master-ami directory
 
+## Requirements
+
+* terraform 0.11.7
+* aws CLI 1.15
+
 ## Build a Jenkins server in AWS
 
 * clone the repository
