@@ -1,10 +1,6 @@
 resource "aws_iam_instance_profile" "jenkins_server" {
   name = "jenkins-${terraform.workspace}-server-profile"
   role = "${aws_iam_role.jenkins_server.name}"
-
-  provisioner "local-exec" {
-    command = "sleep 10"
-  }
 }
 
 resource "aws_iam_role" "jenkins_server" {
