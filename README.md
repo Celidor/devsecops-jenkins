@@ -37,4 +37,16 @@ To destroy:
 terraform destroy
 ```
 
+## IAM Policies
+
+Deployment of this infrastructure has been tested by a user with these IAM policies:
+
+* AmazonEC2FullAccess (AWS managed policy)
+* https://github.com/Celidor/devsecops-jenkins/blob/master/iam/devsecops-jenkins.json
+* https://github.com/Celidor/devsecops-jenkins/blob/master/iam/iam-self-service.json
+* IAMUserChangePassword (AWS managed policy)
+* IAMReadOnlyAccess (AWS managed policy)
+
+## Acknowledgement
+
 This code has been derived from: https://github.com/ignw/terraform-aws-jenkins
