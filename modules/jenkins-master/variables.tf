@@ -45,21 +45,8 @@ variable "alb_prefix" {
   description = "Naming prefix for ALB-related resources"
 }
 
-variable "user_data" {
-  description = "A User Data script to execute while the server is booting."
-}
-
-variable "setup_data" {
-  description = "A User Data script to execute after server has booted to setup jenkins defaults."
-}
-
 variable "ssh_key_name" {
   description = "The name of an EC2 Key Pair that can be used to SSH to the EC2 Instances in this cluster. Set to an empty string to not associate a Key Pair."
-  default     = ""
-}
-
-variable "ssh_key_path" {
-  description = "The path of an EC2 Key Pair that can be used to SSH to the EC2 Instances in this cluster. Used for provisioning."
   default     = ""
 }
 

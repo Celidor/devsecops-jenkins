@@ -13,16 +13,12 @@ module "jenkins-master" {
   name          = "jenkins-${terraform.workspace}"
   alb_prefix    = "jenkins-${terraform.workspace}"
   instance_type = "${var.instance_type_master}"
-
-  ami_id     = "${var.master_ami_id == "" ? data.aws_ami.jenkins.image_id : var.master_ami_id}"
-  user_data  = ""
-  setup_data = "${data.template_file.setup_data_master.rendered}"
+  ami_id        = "${var.master_ami_id == "" ? data.aws_ami.jenkins.image_id : var.master_ami_id}"
 
   http_port                   = "${var.http_port}"
   allowed_ssh_cidr_blocks     = "${var.allowed_ssh_cidr_blocks}"     #["${chomp(data.http.ip.body)}/32"]   #["0.0.0.0/0"]
   allowed_inbound_cidr_blocks = "${var.allowed_inbound_cidr_blocks}" #["${chomp(data.http.ip.body)}/32"] #["0.0.0.0/0"]
   ssh_key_name                = "jenkins-${terraform.workspace}"
-  ssh_key_path                = "jenkins-${terraform.workspace}.pem"
 
   # Config used by the Application Load Balancer
   subnet_ids              = ["${module.jenkins-vpc.jenkins_subnet_az1_id}", "${module.jenkins-vpc.jenkins_subnet_az2_id}"]
