@@ -25,8 +25,11 @@ module "jenkins-master" {
   aws_ssl_certificate_arn = "${var.aws_ssl_certificate_arn}"
   dns_zone                = "${var.dns_zone}"
   app_dns_name            = "jenkins-${terraform.workspace}.${var.dns_zone}"
+
+  plugins = "${var.plugins}"
 }
 
+/*
 data "template_file" "setup_data_master" {
   template = "${file("./modules/jenkins-master/setup.tpl")}"
 
@@ -35,7 +38,7 @@ data "template_file" "setup_data_master" {
     plugins   = "${join(" ", var.plugins)}"
   }
 }
-
+*/
 # Jenkins Linux Slave Instance(s)
 /*
 module "jenkins-linux-slave" {

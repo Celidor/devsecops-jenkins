@@ -1,8 +1,9 @@
 resource "template_file" "user_data" {
-  template = "setup.tpl"
+  template = "${file("${path.module}/setup.tpl")}"
 
   vars {
     jnlp_port = "${var.jnlp_port}"
+    plugins   = "${join(" ", var.plugins)}"
   }
 
   lifecycle {

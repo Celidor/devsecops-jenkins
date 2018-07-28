@@ -80,6 +80,12 @@ variable "jnlp_port" {
   default     = 49187
 }
 
+variable "plugins" {
+  type        = "list"
+  description = "List of Jenkins plugins to be installed"
+  default     = []
+}
+
 variable "tags" {
   type        = "map"
   description = "Supply tags you want added to all resources"
