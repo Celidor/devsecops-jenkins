@@ -1,46 +1,9 @@
-# Launch EC2 instance for master
-
-// TODO: Add ELB for HTTP & HTTPS
-// TODO: Lockdown traffic and make instances private
-// TODO: Refactor security group code so Master has SSH, HTTP + JNLP and Slaves only have SSH, JNLP
-
-# Master ELB
-/*
-resource "aws_iam_server_certificate" "test_cert" {
-  name_prefix      = "example-cert"
-  certificate_body = "${file("self-ca-cert.pem")}"
-  private_key      = "${file("test-key.pem")}"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-resource "aws_elb" "ourapp" {
-  name                      = "terraform-asg-deployment-example"
-  availability_zones        = ["us-west-2a"]
-  cross_zone_load_balancing = true
-
-  listener {
-    instance_port      = 8000
-    instance_protocol  = "http"
-    lb_port            = 443
-    lb_protocol        = "https"
-    ssl_certificate_id = "${aws_iam_server_certificate.test_cert.arn}"
-  }
-
-  # The instances are registered automatically
-  instances = ["${aws_instance.web.*.id}"]
-}
-
-*/
-
-# Master Server
+# Jenkins Master Server
 resource "aws_instance" "ec2_jenkins_master" {
   count                  = 1
   ami                    = "${var.ami_id}"
   instance_type          = "${var.instance_type}"
-  user_data              = "${var.user_data}"
+  user_data              = "${template_file.user_data.rendered}"
   key_name               = "${var.ssh_key_name}"
   iam_instance_profile   = "${aws_iam_instance_profile.jenkins_server.name}"
   subnet_id              = "${var.subnet_id}"
@@ -51,30 +14,9 @@ resource "aws_instance" "ec2_jenkins_master" {
     Name        = "jenkins-${terraform.workspace}"
     Environment = "${terraform.workspace}"
   }
-
-  provisioner "file" {
-    connection = {
-      user        = "ec2-user"
-      private_key = "${file(var.ssh_key_path)}"
-    }
-
-    content     = "${var.setup_data}"
-    destination = "/tmp/setup.sh"
-  }
-
-  provisioner "remote-exec" {
-    connection = {
-      user        = "ec2-user"
-      private_key = "${file(var.ssh_key_path)}"
-    }
-
-    inline = [
-      "chmod +x /tmp/setup.sh",
-      "sudo /tmp/setup.sh",
-    ]
-  }
 }
 
+# Jenkins server security group
 module "security_group_rules" {
   source = "../jenkins-security-group-rules"
 
@@ -89,7 +31,7 @@ module "security_group_rules" {
   jnlp_port  = "${var.jnlp_port}"
 }
 
-# Add the application load balancer
+# application load balancer
 module "jenkins-alb" {
   source                      = "../jenkins-alb"
   name_prefix                 = "${var.alb_prefix}"
