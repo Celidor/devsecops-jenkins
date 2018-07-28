@@ -14,6 +14,9 @@
         {
             "Effect": "Allow",
             "Action": [
+                "iam:DeleteVirtualMFADevice",
+                "iam:CreateVirtualMFADevice",
+                "iam:EnableMFADevice",
                 "iam:CreatePolicy",
                 "iam:CreateRole",
                 "iam:DeleteRole",

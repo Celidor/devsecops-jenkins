@@ -7,9 +7,6 @@
                 "iam:*LoginProfile",
                 "iam:*AccessKey*",
                 "iam:*SSHPublicKey*"
-                "iam:DeleteVirtualMFADevice",
-                "iam:CreateVirtualMFADevice",
-                "iam:EnableMFADevice"
             ],
             "Resource": "arn:aws:iam::REPLACE-BY-ACCOUNT-ID:user/${aws:username}"
         },
