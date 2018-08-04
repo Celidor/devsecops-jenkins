@@ -51,6 +51,9 @@ Deployment of this infrastructure has been tested by a user with these IAM polic
 * https://github.com/Celidor/devsecops-jenkins/blob/master/iam/iam-self-service.json
 * IAMUserChangePassword (AWS managed policy)
 * IAMReadOnlyAccess (AWS managed policy)
+* AWSCloudFormationReadOnlyAccess (AWS managed policy)
+* AmazonS3ReadOnlyAccess (AWS managed policy)
+
 
 ## Acknowledgement
 
