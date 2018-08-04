@@ -54,6 +54,7 @@ Deployment of this infrastructure has been tested by a user with these IAM polic
 * AWSCloudFormationReadOnlyAccess (AWS managed policy)
 * AmazonS3ReadOnlyAccess (AWS managed policy)
 * AmazonAPIGatewayAdministrator (AWS managed policy)
+* AmazonAPIGatewayInvokeFullAccess (AWS managed policy)
 
 
 ## Acknowledgement
