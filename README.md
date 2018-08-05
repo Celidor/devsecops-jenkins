@@ -52,7 +52,7 @@ Deployment of this infrastructure has been tested by a user with these IAM polic
 * IAMUserChangePassword (AWS managed policy)
 * IAMReadOnlyAccess (AWS managed policy)
 * AWSCloudFormationReadOnlyAccess (AWS managed policy)
-* AmazonS3ReadOnlyAccess (AWS managed policy)
+* AmazonS3FullAccess (AWS managed policy)
 * AmazonAPIGatewayAdministrator (AWS managed policy)
 * AmazonAPIGatewayInvokeFullAccess (AWS managed policy)
 
