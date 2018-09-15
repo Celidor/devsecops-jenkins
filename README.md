@@ -1,5 +1,7 @@
 # DevSecOps-Jenkins
 
+Deploys a Jenkins server in AWS with the plugins and IAM role needed for Serverless Framework pipelines
+
 ## Build Jenkins Amazon Machine Image (AMI)
 
 * Use Packer script in the jenkins-master-ami directory
@@ -24,8 +26,7 @@ cd devsecops-jenkins
 The example below is for an environment name "csa1" and a domain "example.com"
 
 * Log in to the AWS console, select EC2, Key Pairs
-* Create a new key pair named jenkins-csa1
-* Copy the downloaded jenkins-csa.pem to the root of devsecops-jenkins directory
+* Create a new key pair named jenkins-csa1 in region eu-west-1
 
 ```
 terraform workspace new csa1
@@ -33,7 +34,7 @@ terraform plan
 terraform apply
 ```
 * Log in to Jenkins at: https://jenkins-csa1.example.com
-* Copy the initial admin password from your terminal remote exec script
+* SSH into the Jenkins instance to obtain the initial admin password
 * Install suggested plugins
 * Enter username and password
 
