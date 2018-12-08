@@ -6,9 +6,12 @@
             "Action": [
                 "iam:*LoginProfile",
                 "iam:*AccessKey*",
-                "iam:*SSHPublicKey*"
+                "iam:*SSHPublicKey*",
+                "iam:DeleteVirtualMFADevice",
+                "iam:CreateVirtualMFADevice",
+                "iam:EnableMFADevice"
             ],
-            "Resource": "arn:aws:iam::REPLACE-BY-ACCOUNT-ID:user/${aws:username}"
+            "Resource": "arn:aws:iam::712765812417:user/${aws:username}"
         },
         {
             "Effect": "Allow",
@@ -16,7 +19,13 @@
                 "iam:ListAccount*",
                 "iam:GetAccountSummary",
                 "iam:GetAccountPasswordPolicy",
-                "iam:ListUsers"
+                "iam:ListMFADevices",
+                "iam:ListVirtualMFADevices",
+                "iam:ListUsers",
+                "iam:GenerateCredentialReport",
+                "iam:GenerateServiceLastAccessedDetails",
+                "iam:SimulateCustomPolicy",
+                "iam:SimulatePrincipalPolicy"
             ],
             "Resource": "*"
         }

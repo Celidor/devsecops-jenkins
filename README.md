@@ -50,9 +50,6 @@ Deployment of this infrastructure has been tested by a user with these IAM polic
 * AmazonEC2FullAccess (AWS managed policy)
 * https://github.com/Celidor/devsecops-jenkins/blob/master/iam/devsecops-jenkins.json
 * https://github.com/Celidor/devsecops-jenkins/blob/master/iam/iam-self-service.json
-* IAMUserChangePassword (AWS managed policy)
-* IAMReadOnlyAccess (AWS managed policy)
-* AWSCloudFormationReadOnlyAccess (AWS managed policy)
 * AmazonS3FullAccess (AWS managed policy)
 * AmazonAPIGatewayAdministrator (AWS managed policy)
 * AmazonAPIGatewayInvokeFullAccess (AWS managed policy)
