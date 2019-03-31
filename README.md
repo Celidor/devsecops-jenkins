@@ -53,6 +53,7 @@ Deployment of this infrastructure has been tested by a user with these IAM polic
 * AmazonS3FullAccess (AWS managed policy)
 * AmazonAPIGatewayAdministrator (AWS managed policy)
 * AmazonAPIGatewayInvokeFullAccess (AWS managed policy)
+* AWSLambdaReadOnlyAccess (AWS managed policy)
 
 
 ## Acknowledgement
