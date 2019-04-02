@@ -41,7 +41,7 @@ variable "win_slave_ami_id" {
 
 variable "instance_type_master" {
   description = "Instance Type to use for master instance(s)"
-  default     = "t2.micro"
+  default     = "t2.small"
 }
 
 variable "allowed_ssh_cidr_blocks" {
