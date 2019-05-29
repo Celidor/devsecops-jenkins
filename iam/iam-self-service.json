@@ -13,7 +13,10 @@
                 "iam:CreateVirtualMFADevice",
                 "iam:EnableMFADevice"
             ],
-            "Resource": "arn:aws:iam::712765812417:user/${aws:username}"
+            "Resource": [
+                "arn:aws:iam::*:mfa/${aws:username}",
+                "arn:aws:iam::*:user/${aws:username}"
+            ]
         },
         {
             "Effect": "Allow",
