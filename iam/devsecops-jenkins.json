@@ -22,6 +22,7 @@
                 "iam:DeleteRole",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteServiceLinkedRole",
+                "iam:ListPolicies",
                 "iam:ListPolicyVersions",
                 "iam:DeletePolicy",
                 "iam:AttachGroupPolicy",
